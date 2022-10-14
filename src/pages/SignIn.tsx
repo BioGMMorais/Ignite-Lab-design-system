@@ -1,5 +1,6 @@
-import { Checkbox } from "../components/CheckBox";
 import { FormEvent, useState } from "react"
+import axios from "axios"
+import { Checkbox } from "../components/CheckBox";
 import { Envelope, Lock } from "phosphor-react";
 import { Button } from "../components/Button";
 import { Heading } from "../components/Heading";
@@ -8,12 +9,15 @@ import { Text } from "../components/Text";
 import { Logo } from "../Logo";
 
 export function SignIn() {
-
   const [isUserSignedIn, setIsUserSignedIn] = useState(false)
 
-  function handleSignIn(event: FormEvent) {
+  async function handleSignIn(event: FormEvent) {
     event.preventDefault()
 
+    await axios.post('/sessions', {
+      email: 'guilhermejones97@gmail.com',
+      password: '12345678',
+    })
 
     setIsUserSignedIn(true)
   }
@@ -76,8 +80,4 @@ export function SignIn() {
         </footer>
       </div>
   )
-}
-
-function useState(arg0: boolean): [any, any] {
-  throw new Error("Function not implemented.");
 }
